@@ -50,8 +50,7 @@ class MyHashSet
 
     private int hash(int elementData)
     {
-        // TODO Clyde
-        return -1;
+        return Math.abs(value % elementData.length);
     }
 
     public void add(int key)
@@ -66,9 +65,18 @@ class MyHashSet
     }
 
     /** Returns true if this set contains the specified element */
-    public boolean contains(int key)
+    public boolean contains(int value)
     {
-        // TODO Clyde
+        HashEntry cur = elementData[hashFunction(value)];
+
+        while (cur != null)
+        {
+            if (cur.data == value)
+            {
+                return true;
+            }
+            cur = cur.next;
+        }
         return false;
     }
 
