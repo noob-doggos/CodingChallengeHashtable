@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class Responses1To4
@@ -18,31 +17,38 @@ public class Responses1To4
     // find the difference solution
     public char findTheDifference(String s, String t)
     {
-        char[] sA = s.toCharArray();
-        Arrays.sort(sA);
-        char[] tA = t.toCharArray();
-        Arrays.sort(tA);
-        String sortedS = new String(sA);
-        String sortedT = new String(tA);
+        HashMap<Character, Integer> sMap = new HashMap<>();
+        HashMap<Character, Integer> tMap = new HashMap<>();
         for (int i = 0; i < s.length(); i++)
-            if (sortedS.charAt(i) != sortedT.charAt(i))
-                return sortedT.charAt(i);
-        return sortedT.charAt(s.length());
+        {
+            char c = s.charAt(i);
+            sMap.put(c, sMap.containsKey(c) ? sMap.get(c) + 1 : 1);
+        }
+        for (int i = 0; i < t.length(); i++)
+        {
+            char c = t.charAt(i);
+            tMap.put(c, tMap.containsKey(c) ? tMap.get(c) + 1 : 1);
+            if (!sMap.containsKey(c) || tMap.get(c) > sMap.get(c))
+            {
+                return c;
+            }
+        }
+        return ' ';
     }
 }
 
 // myhashset solution
 class MyHashSet
 {
-    private HashEntry[] arr;
+    private HashEntry[] elementData;
 
     /** Initialize your data structure here. */
     public MyHashSet()
     {
-        arr = new HashEntry[10];
+        elementData = new HashEntry[10];
     }
 
-    private int hash(int val)
+    private int hash(int elementData)
     {
         // TODO Clyde
         return -1;
