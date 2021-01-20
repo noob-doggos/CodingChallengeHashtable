@@ -45,26 +45,27 @@ class MyHashSet
     /** Initialize your data structure here. */
     public MyHashSet()
     {
-        elementData = new HashEntry[10];
+        elementData = new HashEntry[200];
     }
 
-    private int hash(int elementData)
+    // by: Clyde
+    private int hash(int key)
     {
-        return Math.abs(value % elementData.length);
+        return Math.abs(key % elementData.length);
     }
 
+    // by: Eric
     public void add(int key)
     {
-        int hashcode = hashFunction(key);
+        int hash = hash(key);
 
-        if (elementData[hashcode] == null)
+        if (elementData[hash] == null)
         {
-            elementData[hashcode] = new HashEntry(key);
-            size++;
+            elementData[hash] = new HashEntry(key);
         }
         else
         {
-            HashEntry cur = elementData[hashcode];
+            HashEntry cur = elementData[hash];
             while (cur != null)
             {
                 if (cur.data == key)
@@ -74,44 +75,56 @@ class MyHashSet
                 if (cur.next == null)
                 {
                     cur.next = new HashEntry(key);
-                    size++;
                     return;
                 }
                 cur = cur.next;
             }
         }
-        
-        if (loadFactor() >= MAX_LOAD_FACTOR)
-        {
-            rehash();
-        }
-        // TODO Eric
-
     }
 
+    // by: Eric
     public void remove(int key)
     {
-        elementData = new HashEntry[10];
-        key = 0;
-        // TODO Eric
-    }
-
-    /** Returns true if this set contains the specified element */
-    public boolean contains(int value)
-    {
-        HashEntry cur = elementData[hashFunction(value)];
+        int hash = hash(key);
+        HashEntry cur = elementData[hash];
+        HashEntry prev = null;
 
         while (cur != null)
         {
-            if (cur.data == value)
+            if (cur.data == key)
+            {
+                if (prev == null)
+                {
+                    elementData[hash] = cur.next;
+                }
+                else
+                {
+                    prev.next = cur.next;
+                }
+                break;
+            }
+            prev = cur;
+            cur = cur.next;
+        }
+    }
+
+    /** Returns true if this set contains the specified element */
+    // by: Clyde
+    public boolean contains(int key)
+    {
+        HashEntry cur = elementData[hash(key)];
+
+        while (cur != null)
+        {
+            if (cur.data == key)
             {
                 return true;
             }
             cur = cur.next;
         }
+
         return false;
     }
-    
 
     static class HashEntry
     {
