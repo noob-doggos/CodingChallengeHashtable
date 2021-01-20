@@ -92,7 +92,7 @@ class MyHashSet
     public void remove(int key)
     {
         elementData = new HashEntry[10];
-        size = 0;
+        key = 0;
         // TODO Eric
     }
 
