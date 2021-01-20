@@ -41,11 +41,12 @@ public class Responses1To4
 class MyHashSet
 {
     private HashEntry[] elementData;
-
+    List<Integer> list1;
     /** Initialize your data structure here. */
     public MyHashSet()
     {
         elementData = new HashEntry[10];
+        list1 = new ArrayList<>();
     }
 
     private int hash(int elementData)
@@ -55,17 +56,22 @@ class MyHashSet
 
     public void add(int key)
     {
+         if(!list1.contains(key)){
+         list1.add(key);
         // TODO Eric
 
     }
 
     public void remove(int key)
     {
+        list1.remove(new Integer(key));
         // TODO Eric
     }
 
     /** Returns true if this set contains the specified element */
     public boolean contains(int value)
+        list1.remove(new Integer(key));
+        /*
     {
         HashEntry cur = elementData[hashFunction(value)];
 
@@ -79,6 +85,7 @@ class MyHashSet
         }
         return false;
     }
+    */
 
     static class HashEntry
     {
