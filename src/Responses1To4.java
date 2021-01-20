@@ -3,6 +3,22 @@ import java.util.HashMap;
 public class Responses1To4
 {
     // single number I and II solution
+    // by: Victor
+    /**
+     * This method returns the entry in an array of integers that only appears
+     * once, assuming that all other integers in the array appear at least
+     * twice.
+     * 
+     * Algorithm: For each integer in the given array, record the number of
+     * times it occurs in a hashmap. Then, for each integer in that hashmap,
+     * return the key which maps to a count of 1.
+     * 
+     * Time complexity: O(n), where n is the number of elements in the array.
+     * 
+     * @param nums,
+     *            the array of integers to search for the unique element in.
+     * @return the entry in the array that only apears once.
+     */
     public int singleNumber(int[] nums)
     {
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -15,6 +31,29 @@ public class Responses1To4
     }
 
     // find the difference solution
+    // by: Victor
+    /**
+     * This method returns the character contained by string t but not by string
+     * s, which contains all the characters t contains except for one missing
+     * character.
+     * 
+     * Algorithm: For each character in string s, record the number of times it
+     * occurs in a hashmap. Then, for each character in string t, use another
+     * hashmap to keep track of how many times it occurs in string t. if the
+     * number of occurences for a character in the second hashmap is greater
+     * than the number of occurances in the first hashmap, then that character
+     * is the extra in string t.
+     * 
+     * Time complexity: O(n), where n is the number of characters in string t.
+     * 
+     * 
+     * @param s,
+     *            the string missing the character contained in string t.
+     * @param t,
+     *            the other string containing the character missing from string
+     *            s.
+     * @return
+     */
     public char findTheDifference(String s, String t)
     {
         HashMap<Character, Integer> sMap = new HashMap<>();
@@ -55,6 +94,20 @@ class MyHashSet
     }
 
     // by: Eric
+    /**
+     * This method adds an integer key to the hashset if it doesn't exist
+     * already.
+     * 
+     * Algorithm: hash the key and use the hash as the array index to store the
+     * hashed value at. Then, find the next available HashEntry in the chain of
+     * HashEntrys stored at the array index and store the value there if it
+     * doesn't already exist.
+     * 
+     * Time complexity: O(n), n is the number of elements in the hashset
+     * 
+     * @param key,
+     *            the key to add to the hashset.
+     */
     public void add(int key)
     {
         int hash = hash(key);
@@ -83,6 +136,20 @@ class MyHashSet
     }
 
     // by: Eric
+    /**
+     * The method removes an integer key from the hashset if it exists.
+     * 
+     * Algorithm: hash the key and use the hash as the array index to search for
+     * the key to remove at. Then, search through the chain of HashEntrys stored
+     * at the array index and remove the HashEntry corresponding to the given
+     * key when found by connecting the HashEntry preceding it to the one after
+     * it.
+     * 
+     * Time complexity: O(n), n is the number of elements in the hashset
+     * 
+     * @param key,
+     *            the key to remove from the hashset.
+     */
     public void remove(int key)
     {
         int hash = hash(key);
@@ -110,6 +177,19 @@ class MyHashSet
 
     /** Returns true if this set contains the specified element */
     // by: Clyde
+    /**
+     * This method returns whether the given integer key exists in the hashset.
+     * 
+     * Algorithm: hash the key and use the hash as the array index to search for
+     * the given key at. Searching is done by iterating through each HashEntry
+     * in the chain of HashEntrys stored at the array index.
+     * 
+     * Time complexity: O(n), n is the number of elmeents in the hashset
+     * 
+     * @param key
+     *            the key to search for in the hashset.
+     * @return whether the given key exists in the hashset.
+     */
     public boolean contains(int key)
     {
         HashEntry cur = elementData[hash(key)];
@@ -126,6 +206,7 @@ class MyHashSet
         return false;
     }
 
+    // linkedlist-style HashEntry.
     static class HashEntry
     {
         public int data;
